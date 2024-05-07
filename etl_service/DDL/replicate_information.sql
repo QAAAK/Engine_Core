@@ -5,6 +5,7 @@ create table etl_service.replicate_information (
 	source_table	varchar(150) not null,
 	target_table	varchar(150) not null,
 	list_column	text not null,
+	field_increment date null,
 	distrib	varchar(50) null,
 	last_date	date null
 
