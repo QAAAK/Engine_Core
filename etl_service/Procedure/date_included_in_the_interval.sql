@@ -1,7 +1,7 @@
 the executable procedure
 
 
-CREATE OR REPLACE FUNCTION etl_service.date_included_in_the_interval( tbl_name text )
+CREATE OR REPLACE FUNCTION etl_service.date_included_in_the_interval( table_id text )
 	RETURNS boolean
 	LANGUAGE plpgsql
 	VOLATILE
@@ -24,7 +24,7 @@ begin
 	select launch_interval, launch_date
 		into interval_time, last_date
 		from etl_service.tasks
-	where target_table = tbl_name;
+	where md_id = table_id;
 	
 	
 	
