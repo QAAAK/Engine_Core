@@ -29,7 +29,9 @@ begin
 	
 	clmn_list := etl_service.set_column_list(tbl_name);
 	
-	column_name_for_increment := set_field_increment(table_id);
+	column_name_for_increment := etl_service.set_field_increment(table_id);
+	
+	-- truncate_table
 	
 	if column_name_for_increment isnull 
 		then 

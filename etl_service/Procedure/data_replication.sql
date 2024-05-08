@@ -46,7 +46,7 @@ begin
 	
 	
 	
-	perform monitoring_etl.start_time_of_work(table_id);
+	perform monitoring_etl.end_time_of_work(table_id);
 	
 	
 	
