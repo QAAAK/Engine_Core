@@ -31,7 +31,7 @@ begin
 	if clock_timestamp() - last_date >= interval_time 
 		then 
 			true_or_false := true;
-			return true;
+			return true_or_false;
 	end if;
 	
 	
