@@ -1,7 +1,7 @@
 the executable procedure
 
 
-CREATE OR REPLACE FUNCTION etl_service.set_executable_procedure( id_table int8 )
+CREATE OR REPLACE FUNCTION etl_service.set_executable_procedure( table_id int8 )
 	RETURNS text
 	LANGUAGE plpgsql
 	VOLATILE
@@ -24,12 +24,12 @@ begin
 	select source_table
 		into tbl_name
 		from etl_service.replicate_information 
-	where id = id_table;
+	where id = table_id;
 	
 	
 	clmn_list := etl_service.set_column_list(tbl_name);
 	
-	column_name_for_increment := set_field_increment(id_table);
+	column_name_for_increment := set_field_increment(table_id);
 	
 	if column_name_for_increment isnull 
 		then 
