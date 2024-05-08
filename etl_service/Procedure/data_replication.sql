@@ -34,7 +34,11 @@ begin
 	
 	if interval_is_included == true 
 		then 
+			
+			perform monitoring_service.change_of_status(table_id, interval_is_included);
 			script_replication := etl_service.set_executable_procedure(table_id);
+	else
+			perform monitoring_service.change_of_status(table_id, interval_is_included);
 	end if;
 	
 	
@@ -48,7 +52,9 @@ begin
 	
 	GET DIAGNOSTICS quantity_insert_rows = ROW_COUNT;
 	
-	perform monitoring_service.logger_load_target_table(table_id, message_error_text, quantity_insert_rows, process_status);
+	perform monitoring_service.logger_load_target_table(table_id, message_error_text, quantity_insert_rows);
+	perform monitoring_service.change_of_status(table_id, interval_is_included, process_status);
+	
 	
 	
 	EXCEPTION WHEN OTHERS THEN
@@ -56,7 +62,8 @@ begin
 	
 	process_status = 'FAIL';
 		
-	perform monitoring_service.logger_load_target_table(table_id, message_error_text, quantity_insert_rows, process_status);
+	perform monitoring_service.logger_load_target_table(table_id, message_error_text, quantity_insert_rows);
+	perform monitoring_service.change_of_status(table_id, interval_is_included, process_status);
 
 	end;
 		
