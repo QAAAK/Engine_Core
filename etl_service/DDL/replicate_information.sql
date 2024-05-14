@@ -1,15 +1,16 @@
-create table etl_service.replicate_information (
-	
-	id	int8 default nextval('sequence') not null,
-	loadtype	varchar(9) not null,
-	source_table	varchar(150) not null,
-	target_table	varchar(150) not null,
-	list_column	text not null,
-	field_increment date null,
-	distrib	varchar(50) null,
-	last_date	date null
-
+CREATE TABLE a_tmp_b2b.replicate_information (
+	id int8 NOT NULL DEFAULT nextval('a_tmp_b2b.sequence_replicate_information'::regclass),
+	loadtype numeric(1) NOT NULL,
+	schema_name varchar(50) NOT NULL,
+	source_table varchar(150) NOT NULL,
+	target_table varchar(150) NOT NULL,
+	field_increment varchar(50) NULL,
+	last_date date NULL
 )
-	with (appendoptimized=true, compresstype=zstd, compresslevel=1, orientation = column)
-
- 	distributed by (id)
+WITH (
+	appendonly=true,
+	compresstype=zstd,
+	compresslevel=1,
+	orientation=column
+)
+DISTRIBUTED BY (id);
