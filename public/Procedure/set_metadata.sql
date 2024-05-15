@@ -13,6 +13,7 @@ declare
 	tbl_name text;
 	tbl_schema text;
 	type_load numeric(1);
+	is_table_in_metadata int2;
 
 
 begin
@@ -27,6 +28,10 @@ begin
 	    fetch cur into tbl_schema, tbl_name;
 
 		exit when not found;
+		
+		is_table_in_metadata = public.is_table_in_replicate_metadata(tbl_name);
+		
+		CONTINUE when is_table_in_metadata = 1;
 	
 		type_load := public.determine_loadtype(tbl_schema, tbl_name);
 	
