@@ -78,6 +78,3 @@ AS WITH t6 AS (
   ORDER BY t1.app_n DESC;
 
 -- Permissions
-
-ALTER TABLE fgao_sb.v_wom OWNER TO kirsanovni;
-GRANT ALL ON TABLE fgao_sb.v_wom TO kirsanovni;
