@@ -1,0 +1,75 @@
+-- dds.hive_vas_iot_otchet definition
+
+-- Drop table
+
+-- DROP EXTERNAL TABLE dds.hive_vas_iot_otchet;
+
+CREATE EXTERNAL TABLE core.dds.hive_vas_iot_otchet (
+	inn text,
+	app_n numeric,
+	acc_n text,
+	con_n text,
+	region int2,
+	activation_date timestamp,
+	phone_num int8,
+	kontr_name text,
+	app_class numeric,
+	app_class1 text,
+	con_typ text,
+	con_typ1 text,
+	tariff_plan text,
+	tariff_plan1 text,
+	tp_group text,
+	tp_group1 text,
+	service_id numeric,
+	service_id1 text,
+	service_type int4,
+	service_type1 text,
+	tariff_zone_id numeric,
+	tariff_zone_id1 text,
+	network_operator_id numeric,
+	network_operator_id1 text,
+	place_of_call int4,
+	place_of_call1 text,
+	group_id text,
+	group_id1 text,
+	trans_part float8,
+	bsi_amount_trans_part float8,
+	bsi_discount_trans_part float8,
+	fclc_trans_part float8,
+	product_oebs float8,
+	product_oebs1 text,
+	mcat_business float8,
+	sub_acc_trans text,
+	is_sub_acc_trans_in_list int4,
+	subproduct text,
+	table_business_month text,
+	rn_coefficient text,
+	first_date timestamp,
+	final_product float8,
+	final_product1 text,
+	new_po int4,
+	rn_1m_bsi_amount_trans_part float8,
+	rn_1m_bsi_discount_trans_part float8,
+	rn_3m_bsi_amount_trans_part float8,
+	rn_3m_bsi_discount_trans_part float8,
+	is_b2b int4,
+	final_product_name text,
+	regid int4,
+	vgr int4,
+	fio_otvet_manager text,
+	fr_otvet_manage text,
+	pm text,
+	fr_pm text,
+	mnk text,
+	name_of_holding text,
+	number_of_holding numeric,
+	rn_1m float8,
+	rn_3m float8,
+	podsegment text
+)
+LOCATION (
+	'pxf://analyticsb2b_sb.vas_iot_otchet?PROFILE=hive:orc&SERVER=rndDWHB2B'
+) ON ALL
+FORMAT 'CUSTOM' ( FORMATTER='pxfwritable_import' )
+ENCODING 'UTF8';
