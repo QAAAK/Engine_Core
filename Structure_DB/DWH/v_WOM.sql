@@ -3,25 +3,25 @@ AS WITH t6 AS (
          SELECT to_char('now'::text::date::timestamp with time zone, 'YYYYMM'::text) AS current_month,
             to_char('now'::text::date - '1 mon'::interval, 'YYYYMM'::text) AS previous_month
         ), t3 AS (
-         SELECT DISTINCT rkahmetov_analit_mob.segment,
-            rkahmetov_analit_mob.region,
-            rkahmetov_analit_mob.tariff_id_as_is / 1000::double precision AS tp,
-            sum(rkahmetov_analit_mob.fclc_mob_no_vas) AS fclc,
-            sum(rkahmetov_analit_mob.count_abonent) AS app_n,
-            sum(rkahmetov_analit_mob.fclc_mob_no_vas) / sum(rkahmetov_analit_mob.count_abonent) AS arpu
-           FROM analyticsb2b_sb.rkahmetov_analit_mob
-          WHERE rkahmetov_analit_mob.period = to_char('now'::text::date - '1 year'::interval, 'YYYYMM'::text)::double precision AND rkahmetov_analit_mob.pritok_mob_no_vas::text <> 'Пусто'::text
-          GROUP BY rkahmetov_analit_mob.segment, rkahmetov_analit_mob.region, rkahmetov_analit_mob.tariff_id_as_is
+         SELECT DISTINCT table_analit_mob.segment,
+            table_analit_mob.region,
+            table_analit_mob.tariff_id_as_is / 1000::double precision AS tp,
+            sum(table_analit_mob.fclc_mob_no_vas) AS fclc,
+            sum(table_analit_mob.count_abonent) AS app_n,
+            sum(table_analit_mob.fclc_mob_no_vas) / sum(table_analit_mob.count_abonent) AS arpu
+           FROM analyticsb2b_sb.table_analit_mob
+          WHERE table_analit_mob.period = to_char('now'::text::date - '1 year'::interval, 'YYYYMM'::text)::double precision AND table_analit_mob.pritok_mob_no_vas::text <> 'Пусто'::text
+          GROUP BY table_analit_mob.segment, table_analit_mob.region, table_analit_mob.tariff_id_as_is
         ), t4 AS (
-         SELECT DISTINCT rkahmetov_analit_mob.segment,
-            rkahmetov_analit_mob.region,
-            rkahmetov_analit_mob.tariff_id_as_is / 1000::double precision AS tp,
-            sum(rkahmetov_analit_mob.fclc_mob_no_vas) AS fclc,
-            sum(rkahmetov_analit_mob.count_abonent) AS app_n,
-            sum(rkahmetov_analit_mob.fclc_mob_no_vas) / sum(rkahmetov_analit_mob.count_abonent) AS arpu
-           FROM analyticsb2b_sb.rkahmetov_analit_mob
-          WHERE rkahmetov_analit_mob.period = to_char('now'::text::date - '1 year'::interval - '1 month'::interval, 'YYYYMM'::text)::double precision AND rkahmetov_analit_mob.pritok_mob_no_vas::text <> 'Пусто'::text
-          GROUP BY rkahmetov_analit_mob.segment, rkahmetov_analit_mob.region, rkahmetov_analit_mob.tariff_id_as_is
+         SELECT DISTINCT table_analit_mob.segment,
+            table_analit_mob.region,
+            table_analit_mob.tariff_id_as_is / 1000::double precision AS tp,
+            sum(table_analit_mob.fclc_mob_no_vas) AS fclc,
+            sum(table_analit_mob.count_abonent) AS app_n,
+            sum(table_analit_mob.fclc_mob_no_vas) / sum(table_analit_mob.count_abonent) AS arpu
+           FROM analyticsb2b_sb.table_analit_mob
+          WHERE table_analit_mob.period = to_char('now'::text::date - '1 year'::interval - '1 month'::interval, 'YYYYMM'::text)::double precision AND table_analit_mob.pritok_mob_no_vas::text <> 'Пусто'::text
+          GROUP BY table_analit_mob.segment, table_analit_mob.region, table_analit_mob.tariff_id_as_is
         ), t2 AS (
          SELECT DISTINCT a.segment,
             a.region,
