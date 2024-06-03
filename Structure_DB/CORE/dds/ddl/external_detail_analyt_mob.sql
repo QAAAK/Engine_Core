@@ -69,7 +69,7 @@ CREATE EXTERNAL TABLE core.dds.hive_vas_iot_otchet (
 	podsegment text
 )
 LOCATION (
-	'pxf://analyticsb2b_sb.vas_iot_otchet?PROFILE=hive:orc&SERVER=rndDWHB2B'
+	'pxf://table_name?PROFILE=hive:orc&SERVER=rndDWHB2B'
 ) ON ALL
 FORMAT 'CUSTOM' ( FORMATTER='pxfwritable_import' )
 ENCODING 'UTF8';
