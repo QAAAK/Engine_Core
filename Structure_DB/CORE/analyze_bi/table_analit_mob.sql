@@ -4,7 +4,7 @@
 
 -- DROP TABLE analyze_bi.rkahmetov_analit_mob;
 
-CREATE TABLE analyze_bi.rkahmetov_analit_mob (
+CREATE TABLE analyze_bi.table_analit_mob (
 	date_x date NULL,
 	"period" text NULL,
 	inn text NULL,
