@@ -13,7 +13,7 @@ default_args = {
 with DAG (
     dag_id = "FULL_LOAD_EXTERNAL_TO_TARGET_ALYTICSB2B_SB.RKAHMETOV_ANALIT_MOB",
     default_args=default_args,   
-   schedule_interval = '0 7 * * *',
+   schedule_interval = '0 9 * * 1',
     catchup = False) as dag:
 
     t1 = PostgresOperator( 
