@@ -5,6 +5,7 @@ from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.hooks.postgres_hook import PostgresHook
 from airflow.operators.email import EmailOperator
 
+
 default_args = {
         "email": ["santalovdv@mts.ru"],  # santalovdv
         "email_on_failure": True,
