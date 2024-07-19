@@ -13,7 +13,7 @@ default_args = {
 
 
 with DAG (
-    dag_id = "load_spravochnik_tr",
+    dag_id = "load_guide_tr",
     default_args=default_args,   
    schedule_interval = '0 4 * * *',
     catchup = False) as dag:
