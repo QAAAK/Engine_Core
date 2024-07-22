@@ -4,15 +4,6 @@ CREATE OR REPLACE FUNCTION db_builder.createexternaltable(tablename text, connec
 	VOLATILE
 AS $$
 	
-
-/*
- *  
- *  @author : santalovdv@mts.ru
- * 	
- * 	Процедура генерации DDL external table на основе существующей таблицы
- * 
- * 
- */
 	
 
 			
@@ -75,7 +66,7 @@ end;
 $$
 EXECUTE ON ANY;
 
+-- Permissions
 
-
-
-
+ALTER FUNCTION db_builder.createexternaltable(text, text) OWNER TO santalovdv;
+GRANT ALL ON FUNCTION db_builder.createexternaltable(text, text) TO santalovdv;
