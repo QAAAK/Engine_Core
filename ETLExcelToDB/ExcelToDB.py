@@ -8,13 +8,13 @@ import os
 
 
 
-def excelToCsv (path, sheetName):  
+def excelToCSV (path, sheetName):  
     result = "Выполнено"  
     try:
         createCSVFile(sheetName)
         readFile = pd.read_excel (path, sheet_name = sheetName)
         readFile.to_csv (f"CVM_ALL_TO_DB/{sheetName}.csv", index = None, header=True) 
-        print(f"{sheetName} создан и сохранен")
+        print(f"{sheetName}.csv сохранен")
         
     except: 
         
@@ -37,7 +37,7 @@ def quantitySheet(path):
                 
     except:
         
-        print("Файл не найден.")
+        print("file not found")
         
         return 0
     
@@ -47,7 +47,7 @@ def createCSVFile (name):
     my_file = open(f"CVM_ALL_TO_DB/{name}.csv", "w+")
     my_file.close()
     
-    return "file create"
+    return f"{name}.csv File create"
 
 
 def saveDatainFiles():
@@ -57,23 +57,41 @@ def saveDatainFiles():
     try:
         for sheet in arraySheet:
             excelToCsv(path, sheet)
+            
         return "Passed"
     except:
+        
         return "Error"
     
 
 
+def arrayFile(path):
+    
+    directory = path
+    
+    try:
+        files = os.listdir(directory)
+        
+        arrayFiles = []
+        
+        for file in files:
+            
+            if file == '.ipynb_checkpoints':
+                continue
+            
+            arrayFiles.append(directory + "/" + file)
+        
+        return arrayFiles
+               
+    except:
+        
+        return "no such directory"
+    
+        
 
 
 
 # excelToCsv()
 
-path = "CVM_ALL/CVM_all.xlsx"
 
-arraySheet = quantitySheet(r"CVM_ALL/CVM_all.xlsx")
 
-for sheet in arraySheet:
-    excelToCsv(path, sheet)
-    
-    
-   
