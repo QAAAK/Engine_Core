@@ -8,12 +8,12 @@ import os
 
 
 
-def excelToCSV (path, sheetName):  
+def excelToCSV (sheetName):  
     result = "Выполнено"  
     try:
         createCSVFile(sheetName)
-        readFile = pd.read_excel (path, sheet_name = sheetName)
-        readFile.to_csv (f"CVM_ALL_TO_DB/{sheetName}.csv", index = None, header=True) 
+        readFile = pd.read_excel ("/home/santalovdv/CVM_ALL/CVM_all.xlsx", sheet_name = sheetName)
+        readFile.to_csv (f"/home/santalovdv/csvT/{sheetName}.csv", index = None, header=True) 
         print(f"{sheetName}.csv сохранен")
         
     except: 
@@ -44,7 +44,7 @@ def quantitySheet(path):
         
 def createCSVFile (name):
     
-    my_file = open(f"CVM_ALL_TO_DB/{name}.csv", "w+")
+    my_file = open(f"/home/santalovdv/csvT/{name}.csv", "w+")
     my_file.close()
     
     return f"{name}.csv File create"
@@ -52,11 +52,11 @@ def createCSVFile (name):
 
 def saveDatainFiles():
     
-    arraySheet = quantitySheet(r"CVM_ALL/CVM_all.xlsx")
+    arraySheet = quantitySheet(r"/home/santalovdv/CVM_ALL/CVM_all.xlsx")
     
     try:
         for sheet in arraySheet:
-            excelToCsv(path, sheet)
+            excelToCSV(sheet)
             
         return "Passed"
     except:
@@ -89,6 +89,7 @@ def arrayFile(path):
     
         
 
+# print(saveDatainFiles())
 
 
 # excelToCsv()
