@@ -3,57 +3,62 @@ import psycopg2
 from ExcelToDB import *
 
 
-
-
-def connect():
+class LoadDB:
     
-    try:
-        connection = psycopg2.connect(user="*****",
-                                  # пароль, который указали при установке PostgreSQL
-                                  password="****",
-                                  host="******",
-                                  port="5432",
-                                  database = "core")
+    
+    def __init__(self, path):
         
-        print("connection completed")
-        
-        return connection
-        
-    except:
-        
-        return "connection refused"
+        self.pathCSVFiles = path 
     
-        
-
-def readTable (tableName, schemaName, pathFile, engine):
-    
-    try:
-        df = pd.read_csv(pathFile)
-    except:
-        return "No such file or directory"
-    
-    try:
-        df.to_sql(tableName, engine, schema = schemaName, if_exists='append', index=False)
-    except:
-        return "Error compieled"
-    
-    return f"Insert {pathFile} complete"
-
-
-def insertProcess():
-    
-    arrayPathFiles = "/home/santalovdv/CVM_ALL_TO_DB"  #path 
-    
-    for files in arrayPathFiles:
+    def connect(self):
         
         try:
-            readTable(tableName, schemaName, pathFile, engine)
+            connection = psycopg2.connect(user="*****",
+                                    # пароль, который указали при установке PostgreSQL
+                                    password="****",
+                                    host="******",
+                                    port="5432",
+                                    database = "core")
+            
+            print("connection completed")
+            
+            return connection
             
         except:
-            print(f"Не получилось импортировать {files}")
+            
+            return "connection refused"
+        
+            
 
-    print("Operation completed")
-    return "Completed"
+    def readTable (self, tableName, schemaName, pathFile, engine):
+        
+        try:
+            df = pd.read_csv(pathFile)
+        except:
+            return "No such file or directory"
+        
+        try:
+            df.to_sql(tableName, engine, schema = schemaName, if_exists='append', index=False)
+        except:
+            return "Error compieled"
+        
+        return f"Insert {pathFile} complete"
+
+
+    def insertProcess(self):
+        
+        arrayPathFiles = self.pathCSVFiles  #path 
+        
+        for files in arrayPathFiles:
+            
+            try:
+                self.readTable(tableName, schemaName, pathFile, engine)
+                
+            except:
+                print(f"Failed to import {files}")
+
+        print("Operation completed")
+        return "Completed"
 
 
 
