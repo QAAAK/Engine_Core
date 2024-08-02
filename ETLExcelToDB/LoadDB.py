@@ -14,7 +14,6 @@ class LoadDB:
         
         try:
             connection = psycopg2.connect(user="*****",
-                                    # пароль, который указали при установке PostgreSQL
                                     password="****",
                                     host="******",
                                     port="5432",
@@ -52,7 +51,7 @@ class LoadDB:
         for files in arrayPathFiles:
             
             try:
-                self.readTable(tableName, schemaName, pathFile, engine)
+                self.readTable(tableName, schemaName, pathFile, engine) # Update feature
                 
             except:
                 print(f"Failed to import {files}")

@@ -11,23 +11,24 @@ class ExcelToDB:
     
     
     
-    def __init__(self, pathFile):
+    def __init__(self, pathFileSource, pathFileTarget):
         
-        self.path = pathFile 
+        self.pathSource = pathFileSource
+        self.pathTarget = pathFileTarget
         
     
     def excelToCSV (self, sheetName):  
 
-        result = "Выполнено"  
+        result = "Passed"
         try:
             self.createCSVFile(sheetName)
-            readFile = pd.read_excel (self.path, sheet_name = sheetName)
-            readFile.to_csv (f"/home/santalovdv/csvT/{sheetName}.csv", index = None, header=True) 
-            print(f"{sheetName}.csv сохранен")
+            readFile = pd.read_excel (self.pathSource, sheet_name = sheetName)
+            readFile.to_csv (f"{self.pathTarget}{sheetName}.csv", index = None, header=True)
+            print(f"{sheetName}.csv created")
             
         except: 
             
-            result = "Ошибка"
+            result = "Error"
             return result
         
         return result
@@ -53,7 +54,7 @@ class ExcelToDB:
             
     def createCSVFile (self, name):
         
-        my_file = open(f"/home/santalovdv/csvT/{name}.csv", "w+")
+        my_file = open(f"{self.pathTarget}{name}.csv", "w+")
         my_file.close()
         
         return f"{name}.csv File create"
@@ -61,7 +62,7 @@ class ExcelToDB:
 
     def saveDatainFiles(self):
         
-        arraySheet = self.quantitySheet(self.path)
+        arraySheet = self.quantitySheet(self.pathSource)
         
         try:
             for sheet in arraySheet:
