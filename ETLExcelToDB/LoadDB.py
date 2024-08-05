@@ -7,11 +7,24 @@ class LoadDB:
     
     
     def __init__(self, path):
+        """
+
+
+        :param path: Путь к csv файлам
+        """
         
         self.pathCSVFiles = path 
     
     def connect(self):
-        
+
+        """
+
+        Подключение (пока что только к psycopg2 (gp))
+
+        :return:
+        """
+
+
         try:
             connection = psycopg2.connect(user="*****",
                                     password="****",
@@ -30,7 +43,17 @@ class LoadDB:
             
 
     def readTable (self, tableName, schemaName, pathFile, engine):
-        
+
+        """
+        Запись в базу данных
+
+        :param tableName:
+        :param schemaName:
+        :param pathFile:
+        :param engine:
+        :return:
+        """
+
         try:
             df = pd.read_csv(pathFile)
         except:
@@ -45,6 +68,12 @@ class LoadDB:
 
 
     def insertProcess(self):
+
+        """
+        Процесс загрузки в заданную таблицу
+
+        :return:
+        """
         
         arrayPathFiles = self.pathCSVFiles  #path 
         

@@ -12,12 +12,25 @@ class ExcelToDB:
     
     
     def __init__(self, pathFileSource, pathFileTarget):
+
+        """
+
+        :param pathFileSource: Путь к excel файлу (источнику)
+        :param pathFileTarget: Путь к csv файлам
+        """
         
         self.pathSource = pathFileSource
         self.pathTarget = pathFileTarget
         
     
-    def excelToCSV (self, sheetName):  
+    def excelToCSV (self, sheetName):
+
+        """
+        Функция, преобразующий лист в csv-файл
+
+        :param sheetName: Имя листа
+        :return:
+        """
 
         result = "Passed"
         try:
@@ -35,6 +48,14 @@ class ExcelToDB:
 
 
     def quantitySheet(self,path):
+
+        """
+        Функция, возвращающая список наименований листов
+
+
+        :param path: Путь к excel файлу (источнику)
+        :return:
+        """
         
         try:
 
@@ -53,6 +74,13 @@ class ExcelToDB:
         
             
     def createCSVFile (self, name):
+        """
+
+        Функция создает csv файл
+
+        :param name: Имя файла
+        :return:
+        """
         
         my_file = open(f"{self.pathTarget}{name}.csv", "w+")
         my_file.close()
@@ -61,6 +89,13 @@ class ExcelToDB:
 
 
     def saveDatainFiles(self):
+
+        """
+
+        Функция, вызывающая процесс репликации
+
+        :return:
+        """
         
         arraySheet = self.quantitySheet(self.pathSource)
         
@@ -76,6 +111,14 @@ class ExcelToDB:
 
 
     def arrayFile(self, path):
+
+        """
+
+        Функция, возвращающая путь к файлам
+
+        :param path: Путь к директории (источнику)
+        :return:
+        """
         
         directory = path
         
