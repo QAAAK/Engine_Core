@@ -29,6 +29,9 @@ begin
 		execute query;
 	
 	
+		perform db_builder.setscript(query);
+	
+	
 		GET  diagnostics
 		quantityRows = ROW_COUNT;
 		
