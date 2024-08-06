@@ -6,6 +6,9 @@ AS $$
 	
 	
 	
+	
+	
+	
 
 /*
  *  
@@ -34,12 +37,17 @@ begin
 	
 
 	update db_builder.information_source_and_target_connection 
-	set query = script, last_update = clock_timestamp()
+	set script = query, last_update = clock_timestamp()
 	where source_table = sourceTableName;
 
 
+	perform db_builder.updatetime(tableName);
+
 
 end;
+
+
+
 
 
 
@@ -59,4 +67,5 @@ EXECUTE ON ANY;
 -- Permissions
 
 ALTER FUNCTION db_builder.setscript(text) OWNER TO analyze_bi_owner;
+GRANT ALL ON FUNCTION db_builder.setscript(text) TO public;
 GRANT ALL ON FUNCTION db_builder.setscript(text) TO analyze_bi_owner;

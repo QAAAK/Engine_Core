@@ -6,6 +6,7 @@ AS $$
 	
 	
 	
+	
 
 
 
@@ -23,7 +24,7 @@ begin
 	select when_update  
 	into transferDTTM
 	from db_builder.information_tables_dds a
-	where a.table_name = tablename;
+	where a.table_name like '%' || tablename || '%';
 
 	if transferDTTM = 'Ежедневно' 
 		then 
@@ -37,11 +38,12 @@ begin
 
 	update db_builder.information_tables_dds 
     set last_dttm = currentDTTM, next_dttm = nextDTTM
-    where table_name = tablename;
+    where table_name like '%' || tablename || '%';
 
 	
 	
 end;
+
 
 
 
@@ -55,4 +57,5 @@ EXECUTE ON ANY;
 -- Permissions
 
 ALTER FUNCTION db_builder.updatetime(text) OWNER TO santalovdv;
+GRANT ALL ON FUNCTION db_builder.updatetime(text) TO public;
 GRANT ALL ON FUNCTION db_builder.updatetime(text) TO santalovdv;
