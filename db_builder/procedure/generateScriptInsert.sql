@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION db_builder.generatescriptinsert(schemaname text, tablename text)
+CREATE OR REPLACE FUNCTION db_builder.generatescriptinsert(tableId bigint)
 	RETURNS text
 	LANGUAGE plpgsql
 	VOLATILE
@@ -9,19 +9,39 @@ AS $$
 			
 declare	
 
-	cntRows bigint;
-	schemaNameAndTableName text;
+	sourceTable text;
+	targetTable text;
+	typeLoad varchar(25);
+	columnName varchar(25);
 	insertQuery text;
-
 	
 begin
 	
-	schemaNameAndTableName = schemaName || '.' || tableName;
+	select source_table, target_table, type_load
+	into sourceTable targetTable, typeLoad
+	from db_builder.information_source_and_target_connection isatc
+	where id = tableId;
+
+	if typeLoad = 'FULL'
+		then 
+			insertQuery = 'insert into ' || sourceTable || ' select * from ' || targetTable;
+			
+	elsif typeLoad = 'INCREMENT'
+		then 
+			select increment_column 
+			into columnName
+			from db_builder.information_source_and_target_connection isatc 
+			where id = tableId;
+		
+			insertQuery = 'insert into ' || sourceTable || ' select * from ' || targetTable || ' where ' || columnName || '> (select max(' || columnName || ') from ' || sourceTable;
 	
-	insertQuery = 'insert into ' || schemaNameAndTableName || ' select * from ' || schemaName || '.<tableName>';
-	
-	return insertQuery;
-	
+	else 
+			insertQuery = 'No such table or id';
+			
+	end if;
+
+		
+return insertQuery;
 
 end;
 
@@ -30,8 +50,3 @@ end;
 
 $$
 EXECUTE ON ANY;
-
--- Permissions
-
-ALTER FUNCTION db_builder.generatescriptinsert(text, text) OWNER TO analyze_bi_owner;
-GRANT ALL ON FUNCTION db_builder.generatescriptinsert(text, text) TO analyze_bi_owner;
