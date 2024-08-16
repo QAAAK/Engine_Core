@@ -5,11 +5,8 @@ import os
 
 
 
-
-
 class ExcelToDB:
-    
-    
+        
     
     def __init__(self, pathFileSource, pathFileTarget):
 
@@ -50,6 +47,7 @@ class ExcelToDB:
     def quantitySheet(self,path):
 
         """
+        
         Функция, возвращающая список наименований листов
 
 
@@ -108,7 +106,6 @@ class ExcelToDB:
             
             return "Error"
         
-
 
 
 

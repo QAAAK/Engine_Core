@@ -1,8 +1,8 @@
 from ExcelToDB import *
 from LoadDB import *
 
-
-read = ExcelToDB("/home/santalovdv/CVM_ALL/CVM_all.xlsx")
+#Source files
+read = ExcelToDB("/home/santalovdv/CVM_ALL/", "home/santalovdv/csv")
 read.saveDatainFiles()
 
 writer = LoadDB("/home/santalovdv/CVM_ALL_TO_DB")
