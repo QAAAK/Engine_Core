@@ -5,6 +5,13 @@ CREATE OR REPLACE FUNCTION db_builder.generatescriptinsert(tableid int8)
 AS $$
 	
 	
+/* Процедура - генератор DML запроса
+ *  
+ *  @author : santalovdv@mts.ru
+ * 	
+ * 
+ * 
+ */
 	
 	
 			
