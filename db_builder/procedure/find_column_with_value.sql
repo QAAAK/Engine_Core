@@ -3,6 +3,16 @@ CREATE OR REPLACE FUNCTION db_builder.find_column_with_value(table_name text, se
 	LANGUAGE plpgsql
 	VOLATILE
 AS $$
+
+
+
+/* Процедур поиска поля в таблице (есть/нет)
+ *  
+ *  @author : santalovdv@mts.ru
+ * 	
+ * 
+ * 
+ */
 	
 DECLARE
     column_names TEXT;
