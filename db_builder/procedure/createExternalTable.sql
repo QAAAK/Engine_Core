@@ -5,6 +5,13 @@ CREATE OR REPLACE FUNCTION db_builder.createexternaltable(tablename text, connec
 AS $$
 	
 	
+/* Процедура, создающая внешнюю таблицу 
+ *  
+ *  @author : santalovdv@mts.ru
+ * 	
+ * 
+ * 
+ */
 
 			
 declare	
