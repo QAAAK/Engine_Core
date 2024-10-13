@@ -10,7 +10,7 @@ AS $$
 	
 	
 
-/*
+/* Логгирование
  *  
  *  @author : santalovdv@mts.ru
  * 	
