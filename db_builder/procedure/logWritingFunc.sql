@@ -3,6 +3,14 @@ CREATE OR REPLACE FUNCTION db_builder.logwritingfunc(id_table int8, function_nam
 	LANGUAGE plpgsql
 	VOLATILE
 AS $$
+
+/* Процедура логгирования  
+ *  
+ *  @author : santalovdv@mts.ru
+ * 	
+ * 
+ * 
+ */
 	
 
 DECLARE
