@@ -4,7 +4,13 @@ CREATE OR REPLACE FUNCTION db_builder.typeoperations(query text)
 	VOLATILE
 AS $$
 	
-	
+	/*  Процедура, которая определяет тип операции
+ *  
+ *  @author : santalovdv@mts.ru
+ * 	
+ * 
+ * 
+ */
 	
 
 
